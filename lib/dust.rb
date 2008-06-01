@@ -9,3 +9,8 @@ require 'dust/duster'
 require 'dust/local_variable_duster'
 require 'dust/null_statement_duster'
 require 'dust/block_duster'
+
+require 'dust/sexp_extension'
+class Sexp
+  include Dust::SexpExtension
+end

@@ -29,6 +29,10 @@ module Dust
       end
     end
     
-    class UnprotectedBlock < SimpleWarning; end
+    class UnprotectedBlock < SimpleWarning
+      def ==(other)
+        other.is_a? self.class
+      end
+    end
   end
 end
