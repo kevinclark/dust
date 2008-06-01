@@ -3,8 +3,6 @@ module Dust
     def initialize(klass, meth)
       super
       @lvars = Hash.new {|h,k| h[k] = {:uses => 0, :calls => 0}}
-      @uses = Hash.new(0)
-      @sends = Hash.new(0)
     end
 
     def dust!

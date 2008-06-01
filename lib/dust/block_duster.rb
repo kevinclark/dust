@@ -1,16 +1,5 @@
 module Dust
   class BlockDuster < Duster
-    def initialize(klass, meth)
-      super
-      
-      @checked_for_block = false
-      @calls_yield = false
-    end
-    
-    def checked_for_block?
-      @checked_for_block
-    end
-    
     def process_if(exp)
       cond = exp.shift
       yes_block = exp.shift
