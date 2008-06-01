@@ -1,6 +1,8 @@
 module Dust
   module Warnings
-    class UnusedVariable
+    class SimpleWarning; end
+    
+    class UnusedVariable < SimpleWarning
       attr_reader :variable
 
       def initialize(variable)
@@ -13,7 +15,7 @@ module Dust
     end
     
     
-    class NullStatement
+    class NullStatement < SimpleWarning
       attr_reader :node, :details
       
       def initialize(node, details = {})
@@ -26,5 +28,7 @@ module Dust
         details == other.details
       end
     end
+    
+    class UnprotectedBlock < SimpleWarning; end
   end
 end

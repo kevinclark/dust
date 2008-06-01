@@ -6,7 +6,7 @@ module Dust
       super()
       self.auto_shift_type = true
       self.strict = false
-      self.expected = Array
+      self.expected = Sexp
       
       @class = klass
       @method = meth

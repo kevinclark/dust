@@ -35,7 +35,7 @@ module Dust
       
       use name
       
-      exp
+      s(:lasgn, name, value)
     end
     
     def process_call(exp)
@@ -45,13 +45,13 @@ module Dust
 
       call recv.last if recv.first == :lvar
       
-      exp
+      s(:call, recv, meth, args)
     end
     
     def process_lvar(exp)
       name = exp.shift
       use name
-      [:lvar, name]
+      s(:lvar, name)
     end
   end
 end
