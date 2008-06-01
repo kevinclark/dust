@@ -27,4 +27,10 @@ describe Dust::LocalVariableDuster do
     duster.dust!
     duster.warnings.should == []
   end
+  
+  it "should not create warnings for local variables with calls" do
+    duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :lvar_with_call)
+    duster.dust!
+    duster.warnings.should == []
+  end
 end

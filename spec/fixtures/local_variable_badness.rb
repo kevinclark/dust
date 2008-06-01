@@ -15,5 +15,9 @@ module Fixtures
       bar
       1 + 2
     end
+    
+    def lvar_with_call(foo)
+      foo.bar
+    end
   end
 end
