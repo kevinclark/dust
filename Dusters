@@ -1,0 +1,31 @@
+Block stuff
+===========
+calling yield when you attach the block to an arg
+
+def foo(&block)
+  yield
+end
+
+check for existence of the block when capturing and calling
+def foo(&block)
+  # if block
+  # if !block.nil?
+  # unless block.nil?
+end
+
+Hash stuff
+==========
+options = {}
+options[:a] = 4
+options[:b] = 5
+options[:c] = 6
+
+
+Other
+=====
+x % 2 == 0 ? false : true
+
+rescue nil # code smell
+rescue Exception # too general
+
+NoMethodException on NilClass
