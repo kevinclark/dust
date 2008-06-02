@@ -1,7 +1,5 @@
 module Dust
   module Warnings
-    class SimpleWarning; end
-    
     class UnusedVariable < SimpleWarning
       attr_reader :variable
 
@@ -14,22 +12,16 @@ module Dust
       end
     end
     
-    
-    class NullStatement < SimpleWarning
-      attr_reader :node, :details
-      
-      def initialize(node, details = {})
-        @node = node
-        @details = details
+    class IdenticalBranch < SimpleWarning
+      attr_reader :yes_branch, :no_branch
+      def initialize(*args)
+        @yes_branch, @no_branch = args
+      end
+        
+      def matches?
+        yes_branch == no_branch
       end
       
-      def ==(other)
-        node == other.node
-        details == other.details
-      end
-    end
-    
-    class UnprotectedBlock < SimpleWarning
       def ==(other)
         other.is_a? self.class
       end

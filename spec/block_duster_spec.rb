@@ -19,7 +19,8 @@ describe Dust::BlockDuster do
   it "should warn when there is a yield in a conditional without a block_given? check" do
     duster = Dust::BlockDuster.new(BlockBadness, :simple_conditional_without_check)
     duster.dust!
-    duster.warnings.should == [Dust::Warnings::UnprotectedBlock.new]
+    duster.warnings.size.should == 1
+    duster.warnings.first.should be_a_kind_of(Dust::Warnings::UnprotectedBlock)
   end
   
   it "should not warn when there is a check for block_given? in a complex conditional before yield" do

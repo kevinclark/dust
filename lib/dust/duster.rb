@@ -17,8 +17,16 @@ module Dust
       process(ParseTree.translate(@class, @method))
     end
     
-    def warn(warning)
-      @warnings << warning
+    def scan_for(warning_classes, options = {})
+      matched_warnings = warning_classes.map do |warning_class|
+        warning_class.discover(options[:with])
+      end
+      
+      warn *matched_warnings
+    end
+    
+    def warn(*warnings)
+      @warnings += warnings.compact
     end
     
     def process_defn(exp)

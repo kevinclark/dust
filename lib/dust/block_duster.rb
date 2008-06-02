@@ -1,16 +1,14 @@
 module Dust
   class BlockDuster < Duster
     def process_if(exp)
-      cond = exp.shift
-      yes_block = exp.shift
-      no_block = exp.shift
+      cond = Sexp.from_array(exp.shift)
+      yes_branch = Sexp.from_array(exp.shift)
+      no_branch = Sexp.from_array(exp.shift)
       
-      if Sexp.from_array(yes_block) =~ s(:yield) && 
-         Sexp.from_array(cond) !~ s(:fcall, :block_given?)
-        warn Warnings::UnprotectedBlock.new
-      end
+      scan_for [Warnings::UnprotectedBlock],
+           :with => [cond, yes_branch, no_branch]
       
-      s(:if, cond, yes_block, no_block)
+      s(:if, cond, yes_branch, no_branch)
     end
     
     def process_yield(exp)
