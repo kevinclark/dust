@@ -9,10 +9,6 @@ module Dust
       def matches?
         yes_branch == no_branch
       end
-      
-      def ==(other)
-        other.is_a? self.class
-      end
     end
   end
 end

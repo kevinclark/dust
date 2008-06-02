@@ -11,10 +11,6 @@ module Dust
         (yes_branch == s(:true) and no_branch == s(:false)) or
           (yes_branch == s(:false) and no_branch == s(:true))
       end
-  
-      def ==(other)
-        other.is_a? self.class
-      end
     end
   end
 end
