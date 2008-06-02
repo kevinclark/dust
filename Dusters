@@ -23,8 +23,6 @@ options[:c] = 6
 
 Other
 =====
-x % 2 == 0 ? false : true
-
 rescue nil # code smell
 rescue Exception # too general
 

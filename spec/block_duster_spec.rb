@@ -28,5 +28,4 @@ describe Dust::BlockDuster do
     duster.dust!
     duster.warnings.should == []
   end
-  
 end

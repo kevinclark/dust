@@ -5,9 +5,10 @@ require 'parse_tree'
 require 'ruby2ruby'
 
 require 'dust/warnings/simple_warning'
+require 'dust/warnings/unused_variable'
 require 'dust/warnings/unprotected_block'
-require 'dust/warnings'
 require 'dust/warnings/useless_branch'
+require 'dust/warnings/identical_branch'
 
 require 'dust/duster'
 require 'dust/local_variable_duster'

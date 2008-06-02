@@ -7,5 +7,13 @@ module Fixtures
         false
       end
     end
+    
+    def branch_returning_identical_things
+      if true
+        1 + 2
+      else
+        1 + 2
+      end
+    end
   end
 end
