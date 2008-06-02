@@ -4,7 +4,7 @@ module Dust
       exceptions = exp.shift
       rescue_value = exp.shift
       
-      scan_for [Warnings::RescueValue],
+      scan_for [Warnings::RescueValue, Warnings::RescueEverything],
            :with => [exceptions, rescue_value]
       
       s(:resbody, exceptions, rescue_value)

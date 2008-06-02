@@ -10,6 +10,7 @@ require 'dust/warnings/unprotected_block'
 require 'dust/warnings/useless_branch'
 require 'dust/warnings/identical_branch'
 require 'dust/warnings/rescue_value'
+require 'dust/warnings/rescue_everything'
 
 require 'dust/duster'
 require 'dust/local_variable_duster'

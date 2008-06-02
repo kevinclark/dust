@@ -9,4 +9,17 @@ describe Dust::RescueDuster do
     duster.dust!
     duster.warnings.should == [Dust::Warnings::RescueValue.new]
   end
+  
+  it "should create a warning for rescuing Exception" do
+    duster = Dust::RescueDuster.new(RescueBadness, :rescue_exception)
+    duster.dust!
+    duster.warnings.should == [Dust::Warnings::RescueEverything.new]
+  end
+  
+  it "should create a warning for rescuing Object" do
+    duster = Dust::RescueDuster.new(RescueBadness, :rescue_object)
+    duster.dust!
+    duster.warnings.should == [Dust::Warnings::RescueEverything.new]
+  end
+   
 end
