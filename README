@@ -1,1 +1,32 @@
 Ruby lint. Sorta.
+
+## Examples
+require 'lib/dust'
+
+# Detect unused variabls
+def unused_lvar
+  a = 1
+  1 + 2
+end
+
+d = Dust::LocalVariableDuster.new(Object, :unused_lvar)
+d.dust!
+d.warnings # => [#<Dust::Warnings::UnusedVariable:0x86970 @variable=:a>]
+
+# Catch yield's without a check for block_given?
+def no_conditional_for_block_given
+  yield
+end
+
+d = Dust::BlockDuster.new(Object, :no_conditional_for_block_given)
+d.dust!
+d.warnings # => [#<Dust::Warnings::UnprotectedBlock:0x614dd8 @yes_branch=nil, @condition=nil, @no_branch=nil>]
+
+# Find useless branches
+def silly_if_else
+  1 == 2 ? true : false
+end
+
+d = Dust::BranchDuster.new(Object, :silly_if_else)
+d.dust!
+d.warnings # => [#<Dust::Warnings::UselessBranch:0x5f80e8 @yes_branch=s(:true), @no_branch=s(:false)>]
