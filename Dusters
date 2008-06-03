@@ -20,9 +20,12 @@ options[:a] = 4
 options[:b] = 5
 options[:c] = 6
 
+Methods
+=======
+empty methods
 
 Other
 =====
-rescue Exception # too general
-
 NoMethodException on NilClass
+if x && !x.nil? # tautology
+if x && x.nil?  # contradiction
