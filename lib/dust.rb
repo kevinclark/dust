@@ -13,10 +13,12 @@ require 'dust/warnings/rescue_value'
 require 'dust/warnings/rescue_everything'
 
 require 'dust/duster'
+require 'dust/local_variable_counter'
 require 'dust/local_variable_duster'
 require 'dust/block_duster'
 require 'dust/branch_duster'
 require 'dust/rescue_duster'
+
 
 require 'dust/sexp_extension'
 class Sexp
