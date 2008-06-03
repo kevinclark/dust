@@ -8,7 +8,7 @@ module Dust
       end
 
       def ==(other)
-        @variable == other.variable
+        other.is_a?(self.class) && @variable == other.variable
       end
     end
   end
