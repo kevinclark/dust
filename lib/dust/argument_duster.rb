@@ -11,8 +11,6 @@ module Dust
     end
     
     def process_args(args)
-      $stderr.puts args.inspect
-      
       args.size.times do
         use args.shift
       end
