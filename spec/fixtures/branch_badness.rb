@@ -15,5 +15,13 @@ module Fixtures
         1 + 2
       end
     end
+    
+    def branch_with_assignment_as_condition
+      if a = 1
+        1
+      else
+        2
+      end
+    end
   end
 end

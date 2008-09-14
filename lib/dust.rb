@@ -12,6 +12,7 @@ require 'dust/warnings/identical_branch'
 require 'dust/warnings/rescue_value'
 require 'dust/warnings/rescue_everything'
 require 'dust/warnings/unused_argument'
+require 'dust/warnings/assignment_as_condition'
 
 require 'dust/duster'
 require 'dust/local_variable_counter'

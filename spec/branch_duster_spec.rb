@@ -15,4 +15,10 @@ describe Dust::BranchDuster do
     duster.dust!
     duster.warnings.should == [Dust::Warnings::IdenticalBranch.new]
   end
+  
+  it "should warn for assignments as conditions" do
+    duster = Dust::BranchDuster.new(BranchBadness, :branch_with_assignment_as_condition)
+    duster.dust!
+    duster.warnings.should == [Dust::Warnings::AssignmentAsCondition.new]
+  end
 end

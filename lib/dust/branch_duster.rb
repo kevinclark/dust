@@ -8,6 +8,9 @@ module Dust
       scan_for [Warnings::UselessBranch, Warnings::IdenticalBranch],
            :with => [yes_branch, no_branch]
       
+      scan_for [Warnings::AssignmentAsCondition],
+           :with => [cond]
+      
       s(:if, cond, yes_branch, no_branch)
     end
   end
