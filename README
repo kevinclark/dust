@@ -1,5 +1,7 @@
 Ruby lint. Sorta.
 
+http://github.com/kevinclark/dust/wikis
+
 ## Examples
 require 'lib/dust'
 
