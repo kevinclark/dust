@@ -27,5 +27,29 @@ module Fixtures
     def used_arg(arg)
       arg + 4
     end
+    
+    def lvar_shadowed
+      x = 1
+      yields_to do |x|
+        something_else_happens_here
+      end
+      x + 1
+    end
+    
+    def lvar_shadowed_many_block_vars
+      x = 1
+      yields_to do |p,d,q,x|
+        something_else_happens_here
+      end
+      x + 1
+    end
+    
+    def lvar_not_shadowed
+      x = 1
+      yields_to do |y|
+        something_else_happens_here
+      end
+      x + 1
+    end
   end
 end
