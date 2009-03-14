@@ -9,7 +9,7 @@ module Dust
         case @block_vars.first
         when :masgn
           # :masgns look like (:masgn, (:array, stuff...))
-          assignments = @block_vars.last.deep_clone
+          assignments = @block_vars[1].deep_clone
           assignments.shift # bump the array
           assignments.any? {|sexp| sexp.first == :lasgn }
         when :lasgn
