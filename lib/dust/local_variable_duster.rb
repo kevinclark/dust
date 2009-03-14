@@ -5,7 +5,8 @@ module Dust
       
       @lvars.each do |name, details|
         next if details[:calls] > 0
-        next if details[:uses] >= 2
+        # The first assignment is a use
+        next if details[:uses] > 1
         warn Warnings::UnusedVariable.new(name)
       end
     end

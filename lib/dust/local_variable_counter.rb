@@ -2,6 +2,8 @@ module Dust
   class LocalVariableCounter < Duster
     def initialize(klass, meth)
       super
+      # uses.succ each time a local variable is referenced or assigned to
+      # calls.succ each time a message is sent to a lvar (foo.bar)
       @lvars = Hash.new {|h,k| h[k] = {:uses => 0, :calls => 0}}
     end
     

@@ -37,17 +37,13 @@ describe Dust::LocalVariableDuster do
   it "should warn when a block variable shadows a local variable" do
     duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :lvar_shadowed)
     duster.dust!
-    duster.warnings.should == [Dust::Warnings::ShadowedVariable.new]
+    duster.warnings.should == [Dust::Warnings::ShadowedVariable.new(:x)]
   end
   
   it "should warn when a block variable (among many) shadows a local variable" do
     duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :lvar_shadowed_many_block_vars)
     duster.dust!
     duster.warnings.should == [Dust::Warnings::ShadowedVariable.new]
-  end
-  
-  it "should store the name of the shadowed variable in the warning (move to warning spec)" do
-    pending
   end
   
   it "should not warn when a block variable does not shadow a local variable" do
