@@ -14,6 +14,7 @@ require 'dust/warnings/rescue_everything'
 require 'dust/warnings/unused_argument'
 require 'dust/warnings/assignment_as_condition'
 require 'dust/warnings/shadowed_variable'
+require 'dust/warnings/empty_method'
 
 require 'dust/duster'
 require 'dust/local_variable_counter'
@@ -22,6 +23,7 @@ require 'dust/argument_duster'
 require 'dust/block_duster'
 require 'dust/branch_duster'
 require 'dust/rescue_duster'
+require 'dust/method_duster'
 
 
 require 'dust/sexp_extension'
