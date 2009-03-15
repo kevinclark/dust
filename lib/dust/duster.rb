@@ -8,6 +8,7 @@ module Dust
       self.strict = false
       self.expected = Sexp
       
+      @unsupported.delete(:cfunc)
       @class = klass
       @method = meth
       @warnings = []
@@ -32,9 +33,15 @@ module Dust
     def process_defn(exp)
       method = exp.shift
       result = s(:defn, method)
-      result << process(exp.shift) until exp.empty?
+      
+      until exp.empty?
+        puts("SUPER*" * 80) if exp.first == :super
+        result << process(exp.shift)
+      end
 
       result
     end
+    
+    def process_cfunc(exp); exp.clear; s(); end
   end
 end

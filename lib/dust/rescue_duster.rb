@@ -7,6 +7,8 @@ module Dust
       scan_for [Warnings::RescueValue, Warnings::RescueEverything],
            :with => [exceptions, rescue_value]
       
+      exp.clear
+      
       s(:resbody, exceptions, rescue_value)
     end
   end

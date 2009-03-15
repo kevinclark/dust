@@ -15,4 +15,16 @@ describe Dust::ArgumentDuster do
     duster.dust!
     duster.warnings.should == []
   end
+  
+  it "should not create warnings for splat args" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :used_splat_arg)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
+  it "should not create warnings for args used with splats" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :args_used_with_splats)
+    duster.dust!
+    duster.warnings.should == []
+  end
 end

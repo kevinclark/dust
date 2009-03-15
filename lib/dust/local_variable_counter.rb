@@ -25,6 +25,7 @@ module Dust
       value = exp.shift
       
       use name
+      process(value)
       
       s(:lasgn, name, value)
     end

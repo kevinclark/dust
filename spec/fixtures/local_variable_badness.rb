@@ -60,5 +60,13 @@ module Fixtures
       end
       x + 1
     end
+    
+    def used_splat_arg(*args)
+      args + 4
+    end
+    
+    def args_used_with_splats(args)
+      respond(*args)
+    end
   end
 end

@@ -12,6 +12,7 @@ module Dust
     end
     
     def process_yield(exp)
+      exp.clear
       warn Warnings::UnprotectedBlock.new
       
       s(:yield)

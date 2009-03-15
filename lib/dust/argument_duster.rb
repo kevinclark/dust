@@ -12,7 +12,7 @@ module Dust
     
     def process_args(args)
       args.size.times do
-        use args.shift
+        use args.shift.to_s.gsub(/^\*/, '').to_sym
       end
       
       s(:args, *args)
