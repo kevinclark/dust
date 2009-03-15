@@ -1,5 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 require 'fixtures/local_variable_badness'
+require 'fixtures/block_badness'
 
 include Fixtures
 
@@ -32,5 +33,23 @@ describe Dust::ArgumentDuster do
     duster = Dust::ArgumentDuster.new(LocalVariableBadness, :default_args)
     duster.dust!
     duster.warnings.should == []
+  end
+  
+  it "should handle &block in args when called" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :block_arg_called)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
+  it "should handle &block in args when curried" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :block_arg_curried)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
+  it "should warn when &block in args is unused" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :block_arg_unused)
+    duster.dust!
+    duster.warnings.should == [Dust::Warnings::UnusedArgument.new(:block)]
   end
 end

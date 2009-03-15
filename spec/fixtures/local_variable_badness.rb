@@ -72,5 +72,17 @@ module Fixtures
     def default_args(args=false)
       args
     end
+    
+    def block_arg_unused(&block)
+      1 + 2
+    end
+    
+    def block_arg_called(&block)
+      block.call
+    end
+    
+    def block_arg_curried(&block)
+      respond(&block)
+    end
   end
 end
