@@ -52,4 +52,10 @@ describe Dust::ArgumentDuster do
     duster.dust!
     duster.warnings.should == [Dust::Warnings::UnusedArgument.new(:block)]
   end
+  
+  it "shouldn't warn on non-argument variables" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :rescue_to_variable)
+    duster.dust!
+    duster.warnings.should == []
+  end
 end

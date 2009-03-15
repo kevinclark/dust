@@ -92,5 +92,11 @@ module Fixtures
     def block_arg_curried(&block)
       respond(&block)
     end
+    
+    def rescue_to_variable
+      begin
+      rescue => e
+      end
+    end
   end
 end
