@@ -15,14 +15,27 @@ module Dust
         case @block_vars && @block_vars.first
         when :masgn
           matched = false
-          # :masgns look like (:masgn, (:array, stuff...))
-          assignments = @block_vars[1].deep_clone
-          assignments.shift # bump the array
-          assignments.each do |sexp|
+          #                     label,  args,                                     splats,       ..
+          # :masgns look like [:masgn, [:array, [:dasgn_curr, :x]],               [:lasgn, :a], nil]
+          #         or        [:masgn, nil,                                       [:lasgn, :a], nil]
+          #         or        [:masgn, [:array, [:dasgn_curr, :x], [:lasgn, :a]], nil,          nil]
+          
+          to_check = []
+          
+          assigns = @block_vars[1].deep_clone
+          if assigns
+            assigns.shift # bump the array
+            to_check += assigns
+          end
+          
+          to_check += s(@block_vars[2].deep_clone) if @block_vars[2]
+          
+          to_check.each do |sexp|
             next unless sexp.first == :lasgn
             vars << sexp[1]
             matched = true
           end
+          
           matched
         when :lasgn
           vars << @block_vars[1]

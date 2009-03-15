@@ -35,6 +35,20 @@ describe Dust::Warnings::ShadowedVariable do
     warning.vars.should == Set.new([:x])
   end
   
+  it "should handle splat args in multiple assignment" do
+    exp =  s(:masgn, s(:array, s(:dasgn_curr, :x), s(:dasgn_curr, :y)), s(:lasgn, :a), nil)
+    warning = Dust::Warnings::ShadowedVariable.new(exp)
+    warning.matches?.should be_true
+    warning.vars.should == Set.new([:a])
+  end
+  
+  it "should handle one splat arg" do
+    exp = s(:masgn, nil, s(:lasgn, :a), nil)
+    warning = Dust::Warnings::ShadowedVariable.new(exp)
+    warning.matches?.should be_true
+    warning.vars.should == Set.new([:a])
+  end
+  
   it "should store the name of all shadowed variables" do
     exp = s(:masgn, s(:array, s(:dasgn_curr, :p), s(:dasgn_curr, :d), 
                                s(:lasgn, :q, nil), s(:lasgn, :x, nil)), nil, nil)
