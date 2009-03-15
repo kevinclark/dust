@@ -68,5 +68,9 @@ module Fixtures
     def args_used_with_splats(args)
       respond(*args)
     end
+    
+    def default_args(args=false)
+      args
+    end
   end
 end

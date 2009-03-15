@@ -1,5 +1,5 @@
 require File.dirname(__FILE__) + '/spec_helper'
-require 'fixtures/branch_badness'
+require 'fixtures/local_variable_badness'
 
 include Fixtures
 
@@ -24,6 +24,12 @@ describe Dust::ArgumentDuster do
   
   it "should not create warnings for args used with splats" do
     duster = Dust::ArgumentDuster.new(LocalVariableBadness, :args_used_with_splats)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
+  it "should ignore [:block] arguments in args" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :default_args)
     duster.dust!
     duster.warnings.should == []
   end

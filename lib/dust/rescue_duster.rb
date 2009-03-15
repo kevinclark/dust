@@ -8,7 +8,7 @@ module Dust
            :with => [exceptions, rescue_value]
       
       exp.clear
-      
+
       s(:resbody, exceptions, rescue_value)
     end
   end
