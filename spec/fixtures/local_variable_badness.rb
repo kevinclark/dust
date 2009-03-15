@@ -9,7 +9,7 @@ module Fixtures
       bar = 4
       bar + 4
     end
-
+    
     def unused_lvar
       bar = 4
       bar
@@ -26,6 +26,15 @@ module Fixtures
     
     def used_arg(arg)
       arg + 4
+    end
+    
+    def lvar_with_iasgn
+      foo = 1
+      @bar = foo
+    end
+    
+    def arg_with_iasgn(arg)
+      @foo = arg
     end
     
     def lvar_shadowed

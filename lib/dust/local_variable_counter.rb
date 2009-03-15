@@ -5,6 +5,7 @@ module Dust
       # uses.succ each time a local variable is referenced or assigned to
       # calls.succ each time a message is sent to a lvar (foo.bar)
       @lvars = Hash.new {|h,k| h[k] = {:uses => 0, :calls => 0}}
+      @args = []
     end
     
     def uses(name)
@@ -28,6 +29,15 @@ module Dust
       s(:lasgn, name, value)
     end
     
+    def process_iasgn(exp)
+      name = exp.shift
+      value = exp.shift
+      
+      process(value)
+      
+      s(:iasgn, name, value)
+    end
+    
     def process_call(exp)
       recv = process(exp.shift)
       meth = exp.shift
@@ -42,6 +52,11 @@ module Dust
       name = exp.shift
       use name
       s(:lvar, name)
+    end
+    
+    def process_args(exp)
+      @args << exp.shift until exp.empty?
+      s(:args, *@args)
     end
   end
 end

@@ -4,6 +4,7 @@ module Dust
       super
       
       @lvars.each do |name, details|
+        next if @args.include? name
         next if details[:calls] > 0
         # The first assignment is a use
         next if details[:uses] > 1

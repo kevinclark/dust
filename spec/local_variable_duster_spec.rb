@@ -34,6 +34,18 @@ describe Dust::LocalVariableDuster do
     duster.warnings.should == []
   end
   
+  it "should not create warnings for local variables with iasgns" do
+    duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :lvar_with_iasgn)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
+  it "should not create warnings for arguments with iasgns" do
+    duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :arg_with_iasgn)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
   it "should warn when a block variable shadows a local variable" do
     duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :lvar_shadowed)
     duster.dust!
