@@ -31,6 +31,7 @@ at_exit do
     methods.each do |meth, warnings|
       $warnings[klass].delete(meth) if warnings.empty?
     end
+    $warnings.delete(klass) if $warnings[klass].empty?
   end
   
   pp $warnings
