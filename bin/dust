@@ -21,7 +21,12 @@ Dusters = [
 ]
 
 class Module
+  # So we don't set off -w
+  alias_method :original_method_added, :method_added
+  
   def method_added(name)
+    original_method_added(name)
+    
     return if DustOptions[:except].any? {|namespace| /#{namespace}/ =~ self.to_s }
     return unless DustOptions[:only].empty? or DustOptions[:only].any? {|namespace|  /#{namespace}/ =~ self.to_s }
     
