@@ -22,7 +22,7 @@ module Dust
         warning_class.discover(options[:with])
       end
       
-      warn *matched_warnings
+      warn(*matched_warnings)
     end
     
     def warn(*warnings)
