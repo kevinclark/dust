@@ -76,4 +76,9 @@ describe Dust::LocalVariableDuster do
     duster.warnings.should == []
   end
   
+  it "should not warn about unused args" do
+    duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :simple_unused_arg)
+    duster.dust!
+    duster.warnings.should == []
+  end
 end

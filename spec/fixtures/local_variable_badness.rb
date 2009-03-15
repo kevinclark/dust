@@ -20,6 +20,10 @@ module Fixtures
       foo.bar
     end
     
+    def simple_unused_arg(other)
+      -1
+    end
+    
     def unused_arg(arg)
       1 + 2
     end
@@ -87,6 +91,6 @@ module Fixtures
     
     def block_arg_curried(&block)
       respond(&block)
-    end    
+    end
   end
 end
