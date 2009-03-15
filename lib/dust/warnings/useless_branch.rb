@@ -4,7 +4,7 @@ module Dust
       attr_reader :yes_branch, :no_branch
   
       def initialize(*args)
-        @yes_branch, @no_branch = args
+        @cond, @yes_branch, @no_branch = args
       end
     
       def matches?
@@ -13,7 +13,7 @@ module Dust
       end
       
       def message
-        "A conditional returns only 'true' or 'false'. Return the condition instead."
+        "No need for an if. Just return '#{sexp_to_ruby(@cond)}'."
       end
     end
   end

@@ -15,7 +15,7 @@ module Dust
       end
       
       def message
-        'A rescue is returning a value directly and may not handle an error.'
+        "A rescue is returning #{sexp_to_ruby(@rescue_value.first).inspect} directly and may not handle an error."
       end
     end
   end

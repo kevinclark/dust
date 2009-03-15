@@ -13,9 +13,9 @@ module Dust
       def matches?
         ASSIGNMENT_NODES.include? @condition.first
       end
-      
+
       def message
-        "An assigment is being used as a condition."
+        "An assigment is being used as a condition: (#{sexp_to_ruby(@condition)})"
       end
     end
   end

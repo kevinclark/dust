@@ -35,7 +35,6 @@ module Dust
       result = s(:defn, method)
       
       until exp.empty?
-        puts("SUPER*" * 80) if exp.first == :super
         result << process(exp.shift)
       end
 

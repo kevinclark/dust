@@ -17,6 +17,12 @@ module Dust
       def message
         raise NotImplementedError
       end
+      
+      private
+      
+        def sexp_to_ruby(sexp)
+          Ruby2Ruby.new.process(Unifier.new.process(sexp))
+        end
     end
   end
 end

@@ -6,7 +6,7 @@ module Dust
       no_branch = process(exp.shift)
       
       scan_for [Warnings::UselessBranch, Warnings::IdenticalBranch],
-           :with => [yes_branch, no_branch]
+           :with => [cond, yes_branch, no_branch]
       
       scan_for [Warnings::AssignmentAsCondition],
            :with => [cond]
