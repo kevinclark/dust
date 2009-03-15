@@ -1,0 +1,39 @@
+#!/usr/bin/env ruby -w
+require 'pp'
+
+require 'rubygems'
+$:.unshift File.join(File.dirname(__FILE__), *%w[.. lib])
+require 'dust'
+
+# {Constant => {Method => [Warnings]}}
+$warnings = Hash.new {|h,k| h[k] = Hash.new {|_h,_k| _h[_k] = [] }}
+
+Dusters = [
+  Dust::ArgumentDuster, Dust::BlockDuster, Dust::BranchDuster,
+  Dust::LocalVariableDuster, Dust::MethodDuster, Dust::RescueDuster
+]
+
+class Class
+  def method_added(name)
+    # puts "Method added: #{name} to #{self}"
+    warnings = Dusters.map do |duster_class|
+      duster = duster_class.new(self, name)
+      duster.dust!
+      duster.warnings
+    end.flatten
+    
+    $warnings[self][name] = warnings
+  end
+end
+
+at_exit do
+  $warnings.each do |klass, methods|
+    methods.each do |meth, warnings|
+      $warnings[klass].delete(meth) if warnings.empty?
+    end
+  end
+  
+  pp $warnings
+end
+
+ARGV.each {|file| load file }
