@@ -2,33 +2,53 @@ Ruby lint. Sorta.
 
 http://github.com/kevinclark/dust/wikis
 
-## Examples
-require 'lib/dust'
 
-# Detect unused variabls
-def unused_lvar
-  a = 1
-  1 + 2
-end
+Clio:dust kev$ ./bin/dust spec/fixtures/block_badness.rb \
+    spec/fixtures/branch_badness.rb \
+    spec/fixtures/method_badness.rb \
+    spec/fixtures/rescue_badness.rb \
+    spec/fixtures/local_variable_badness.rb
 
-d = Dust::LocalVariableDuster.new(Object, :unused_lvar)
-d.dust!
-d.warnings # => [#<Dust::Warnings::UnusedVariable:0x86970 @variable=:a>]
+Fixtures::BranchBadness
+branch_returning_true_or_false
+- No need for an if. Just coerce '(1 == 2)' to a boolean.
+branch_returning_identical_things
+- The branches of 'if (true)' are identical.
+branch_with_assignment_as_condition
+- An assigment is being used as a condition: (a = 1)
+- The variable :a is unused.
 
-# Catch yield's without a check for block_given?
-def no_conditional_for_block_given
-  yield
-end
+Fixtures::MethodBadness
+empty_method
+- The method :empty_method is empty.
 
-d = Dust::BlockDuster.new(Object, :no_conditional_for_block_given)
-d.dust!
-d.warnings # => [#<Dust::Warnings::UnprotectedBlock:0x614dd8 @yes_branch=nil, @condition=nil, @no_branch=nil>]
+Fixtures::LocalVariableBadness
+rescue_to_variable
+- The variable :e is unused.
+lvar_shadowed_many_block_vars
+- One or more variable(s) are being shadowed (x)
+unused_lasgn
+- The variable :bar is unused.
+simple_unused_arg
+- The argument :other is unused.
+block_arg_unused
+- The argument :block is unused.
+unused_arg
+- The argument :arg is unused.
+lvar_shadowed
+- One or more variable(s) are being shadowed (x)
 
-# Find useless branches
-def silly_if_else
-  1 == 2 ? true : false
-end
+Fixtures::BlockBadness
+no_conditional_for_block_given
+- A block is being yielded to without a check for block_given?
+simple_conditional_without_check
+- A block is being yielded to without a check for block_given?
 
-d = Dust::BranchDuster.new(Object, :silly_if_else)
-d.dust!
-d.warnings # => [#<Dust::Warnings::UselessBranch:0x5f80e8 @yes_branch=s(:true), @no_branch=s(:false)>]
+Fixtures::RescueBadness
+rescue_object
+- A rescue is capturing Object or Exception, which may hide errors.
+rescue_nil
+- A rescue is returning "nil" directly and may not handle an error.
+rescue_exception
+- A rescue is capturing Object or Exception, which may hide errors.
+

@@ -11,7 +11,7 @@ module Dust
       end
       
       def message
-        "The branches of if (#{sexp_to_ruby(@cond)}) are identical."
+        "The branches of 'if (#{sexp_to_ruby(@cond)})' are identical."
       end
     end
   end

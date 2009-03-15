@@ -13,7 +13,7 @@ module Dust
       end
       
       def message
-        "No need for an if. Just return '#{sexp_to_ruby(@cond)}'."
+        "No need for an if. Just return '#{sexp_to_ruby(@cond)}' as a boolean."
       end
     end
   end
