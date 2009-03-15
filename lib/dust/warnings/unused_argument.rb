@@ -10,6 +10,10 @@ module Dust
       def ==(other)
         @argument == other.argument
       end
+      
+      def message
+        "The argument #{@argument.inspect} is unused."
+      end
     end
   end
 end

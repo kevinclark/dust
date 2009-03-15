@@ -13,6 +13,10 @@ module Dust
         return false if val.nil? or val.empty?
         [:lit, :nil].include? val.first # the value's type
       end
+      
+      def message
+        'A rescue is returning a value directly and may not handle an error.'
+      end
     end
   end
 end

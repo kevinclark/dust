@@ -9,6 +9,10 @@ module Dust
       def matches?
         yes_branch == no_branch
       end
+      
+      def message
+        'The branches of a conditional are identical.'
+      end
     end
   end
 end

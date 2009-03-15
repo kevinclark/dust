@@ -26,6 +26,7 @@ class Class
 end
 
 at_exit do
+  # Prune empty classes and methods
   $warnings.each do |klass, methods|
     methods.each do |meth, warnings|
       $warnings[klass].delete(meth) if warnings.empty?
@@ -33,7 +34,16 @@ at_exit do
     $warnings.delete(klass) if $warnings[klass].empty?
   end
   
-  pp $warnings
+  $warnings.each do |klass, methods|
+    puts "#{klass}"
+    methods.each do |meth, warnings|
+      puts "  #{meth}"
+      warnings.each do |w|
+        puts "    - #{w.message}"
+      end
+    end
+    puts
+  end
 end
 
 ARGV.each {|file| load file }

@@ -15,6 +15,10 @@ module Dust
       def ==(other)
         yes_branch == other.yes_branch && no_branch == other.no_branch
       end
+      
+      def message
+        "A block is being yielded to without a check for block_given?"
+      end
     end
   end
 end

@@ -13,6 +13,10 @@ module Dust
       def ==(other)
         other.is_a? self.class
       end
+      
+      def message
+        raise NotImplementedError
+      end
     end
   end
 end

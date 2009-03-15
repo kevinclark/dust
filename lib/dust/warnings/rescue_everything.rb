@@ -11,6 +11,10 @@ module Dust
           @exceptions.include? [:const, const]
         end
       end
+      
+      def message
+        "A rescue is capturing Object or Exception, which may hide errors."
+      end
     end
   end
 end

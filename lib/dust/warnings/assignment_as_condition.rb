@@ -13,6 +13,10 @@ module Dust
       def matches?
         ASSIGNMENT_NODES.include? @condition.first
       end
+      
+      def message
+        "An assigment is being used as a condition."
+      end
     end
   end
 end

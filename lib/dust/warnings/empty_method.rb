@@ -10,6 +10,10 @@ module Dust
       def matches?
         @body == [:nil]
       end
+      
+      def message
+        "The method #{@name.inspect} is empty."
+      end
     end
   end
 end
