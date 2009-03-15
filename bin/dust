@@ -34,6 +34,8 @@ at_exit do
     $warnings.delete(klass) if $warnings[klass].empty?
   end
   
+  puts "Nothing to report boss! He's clean!" if $warnings.empty?
+  
   $warnings.each do |klass, methods|
     puts "#{klass}"
     methods.each do |meth, warnings|
