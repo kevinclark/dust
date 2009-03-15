@@ -9,16 +9,5 @@ module Dust
         warn Warnings::UnusedArgument.new(name)
       end
     end
-    
-    def process_args(args)
-      args.each do |arg|
-        next unless arg.is_a? Symbol
-        use arg.to_s.gsub(/^\*/, '').to_sym
-      end
-      
-      args.clear
-      
-      s(:args, *args)
-    end
   end
 end

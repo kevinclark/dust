@@ -69,6 +69,10 @@ module Fixtures
       respond(*args)
     end
     
+    def splat_args_used_with_splat(*args)
+      respond(*args)
+    end
+    
     def default_args(args=false)
       args
     end
@@ -83,6 +87,6 @@ module Fixtures
     
     def block_arg_curried(&block)
       respond(&block)
-    end
+    end    
   end
 end

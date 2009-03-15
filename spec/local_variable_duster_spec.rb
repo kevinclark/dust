@@ -70,4 +70,10 @@ describe Dust::LocalVariableDuster do
     duster.warnings.should == []
   end
   
+  it "should not warn when splat args are used with splats" do
+    duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :splat_args_used_with_splat)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
 end
