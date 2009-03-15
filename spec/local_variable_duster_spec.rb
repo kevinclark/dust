@@ -63,4 +63,11 @@ describe Dust::LocalVariableDuster do
     duster.dust!
     duster.warnings.should == []
   end
+  
+  it "should not warn when a block arg is referenced" do
+    duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :block_arg_curried)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
 end

@@ -20,12 +20,5 @@ module Dust
       
       s(:args, *args)
     end
-    
-    def process_block_arg(exp)
-      name = exp.shift
-      @args << name
-      use name
-      s(:block_arg, name)
-    end
   end
 end

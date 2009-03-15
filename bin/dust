@@ -15,7 +15,6 @@ Dusters = [
 
 class Class
   def method_added(name)
-    # puts "Method added: #{name} to #{self}"
     warnings = Dusters.map do |duster_class|
       duster = duster_class.new(self, name)
       duster.dust!
