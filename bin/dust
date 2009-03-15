@@ -14,14 +14,13 @@ opts = Trollop::options do
   opt :except, "Don't dust classes/modules that match this string.", :type => :string, :multi => true
 end
 
-puts "Options: #{opts.inspect}"
 DustOptions = { :only => opts[:only] || [], :except => opts[:except] || []}
 Dusters = [
   Dust::ArgumentDuster, Dust::BlockDuster, Dust::BranchDuster,
   Dust::LocalVariableDuster, Dust::MethodDuster, Dust::RescueDuster
 ]
 
-class Class
+class Module
   def method_added(name)
     return if DustOptions[:except].any? {|namespace| /#{namespace}/ =~ self.to_s }
     return unless DustOptions[:only].empty? or DustOptions[:only].any? {|namespace|  /#{namespace}/ =~ self.to_s }
