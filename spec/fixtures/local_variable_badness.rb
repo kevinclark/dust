@@ -98,5 +98,8 @@ module Fixtures
       rescue => e
       end
     end
+    
+    def anonymous_args(*)
+    end
   end
 end

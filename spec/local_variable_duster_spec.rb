@@ -81,4 +81,10 @@ describe Dust::LocalVariableDuster do
     duster.dust!
     duster.warnings.should == []
   end
+  
+  it "shouldn't barf on anonymous splat args" do
+    duster = Dust::LocalVariableDuster.new(LocalVariableBadness, :anonymous_args)
+    duster.dust!
+    duster.warnings.should == []
+  end
 end

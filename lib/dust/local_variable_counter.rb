@@ -58,9 +58,12 @@ module Dust
     def process_args(exp)
       exp.each do |arg|
         next unless arg.is_a? Symbol
-        name = arg.to_s.gsub(/^\*/, '').to_sym
-        @args << name
-        use name
+        
+        name = arg.to_s.gsub(/^\*/, '')
+        next if name == ""
+        
+        @args << name.to_sym
+        use name.to_sym
       end
       
       exp.clear
