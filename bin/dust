@@ -8,6 +8,14 @@ require 'dust'
 # {Constant => {Method => [Warnings]}}
 $warnings = Hash.new {|h,k| h[k] = Hash.new {|_h,_k| _h[_k] = [] }}
 
+require 'trollop'
+opts = Trollop::options do
+  opt :only, "Dust only classes/modules that match this string.", :type => :string, :multi => true
+  opt :except, "Don't dust classes/modules that match this string.", :type => :string, :multi => true
+end
+
+puts "Options: #{opts.inspect}"
+DustOptions = { :only => opts[:only] || [], :except => opts[:except] || []}
 Dusters = [
   Dust::ArgumentDuster, Dust::BlockDuster, Dust::BranchDuster,
   Dust::LocalVariableDuster, Dust::MethodDuster, Dust::RescueDuster
@@ -15,6 +23,9 @@ Dusters = [
 
 class Class
   def method_added(name)
+    return if DustOptions[:except].any? {|namespace| /#{namespace}/ =~ self.to_s }
+    return unless DustOptions[:only].empty? or DustOptions[:only].any? {|namespace|  /#{namespace}/ =~ self.to_s }
+    
     warnings = Dusters.map do |duster_class|
       duster = duster_class.new(self, name)
       duster.dust!
