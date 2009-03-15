@@ -10,45 +10,45 @@ Clio:dust kev$ ./bin/dust spec/fixtures/block_badness.rb \
     spec/fixtures/local_variable_badness.rb
 
 Fixtures::BranchBadness
-branch_returning_true_or_false
-- No need for an if. Just coerce '(1 == 2)' to a boolean.
-branch_returning_identical_things
-- The branches of 'if (true)' are identical.
-branch_with_assignment_as_condition
-- An assigment is being used as a condition: (a = 1)
-- The variable :a is unused.
+  branch_returning_true_or_false
+    - No need for an if. Just return '(1 == 2)' as a boolean.
+  branch_returning_identical_things
+    - The branches of 'if (true)' are identical.
+  branch_with_assignment_as_condition
+    - An assigment is being used as a condition: (a = 1)
+    - The variable :a is unused.
 
 Fixtures::MethodBadness
-empty_method
-- The method :empty_method is empty.
+  empty_method
+    - The method :empty_method is empty.
 
 Fixtures::LocalVariableBadness
-rescue_to_variable
-- The variable :e is unused.
-lvar_shadowed_many_block_vars
-- One or more variable(s) are being shadowed (x)
-unused_lasgn
-- The variable :bar is unused.
-simple_unused_arg
-- The argument :other is unused.
-block_arg_unused
-- The argument :block is unused.
-unused_arg
-- The argument :arg is unused.
-lvar_shadowed
-- One or more variable(s) are being shadowed (x)
+  rescue_to_variable
+    - The variable :e is unused.
+  lvar_shadowed_many_block_vars
+    - One or more variable(s) are being shadowed (x)
+  unused_lasgn
+    - The variable :bar is unused.
+  simple_unused_arg
+    - The argument :other is unused.
+  block_arg_unused
+    - The argument :block is unused.
+  unused_arg
+    - The argument :arg is unused.
+  lvar_shadowed
+    - One or more variable(s) are being shadowed (x)
 
 Fixtures::BlockBadness
-no_conditional_for_block_given
-- A block is being yielded to without a check for block_given?
-simple_conditional_without_check
-- A block is being yielded to without a check for block_given?
+  no_conditional_for_block_given
+    - A block is being yielded to without a check for block_given?
+  simple_conditional_without_check
+    - A block is being yielded to without a check for block_given?
 
 Fixtures::RescueBadness
-rescue_object
-- A rescue is capturing Object or Exception, which may hide errors.
-rescue_nil
-- A rescue is returning "nil" directly and may not handle an error.
-rescue_exception
-- A rescue is capturing Object or Exception, which may hide errors.
+  rescue_object
+    - A rescue is capturing Object or Exception, which may hide errors.
+  rescue_nil
+    - A rescue is returning "nil" directly and may not handle an error.
+  rescue_exception
+    - A rescue is capturing Object or Exception, which may hide errors.
 
