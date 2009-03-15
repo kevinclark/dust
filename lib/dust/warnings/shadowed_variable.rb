@@ -44,7 +44,7 @@ module Dust
       end
       
       def message
-        "One or more variable(s) are being shadowed (#{@vars.to_a.join(',')})"
+        "One or more variables are being shadowed (#{@vars.to_a.join(',')})"
       end
     end
   end
