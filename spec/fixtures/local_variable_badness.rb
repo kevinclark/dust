@@ -93,6 +93,14 @@ module Fixtures
       respond(&block)
     end
     
+    def super_with_implicit_args(arg)
+      super
+    end
+    
+    def super_with_explicit_args(arg)
+      super()
+    end
+    
     def rescue_to_variable
       begin
       rescue => e

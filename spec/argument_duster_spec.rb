@@ -23,6 +23,18 @@ describe Dust::ArgumentDuster do
     duster.warnings.should == []
   end
   
+  it "should not create warnings when calling super with no explicit arguments" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :super_with_implicit_args)
+    duster.dust!
+    duster.warnings.should == []
+  end
+  
+  it "should create warnings when calling super with explicit arguments but without referencing the passed arguments" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :super_with_explicit_args)
+    duster.dust!
+    duster.warnings.should == [Dust::Warnings::UnusedArgument.new(:arg)]
+  end
+  
   it "should not create warnings for args used with splats" do
     duster = Dust::ArgumentDuster.new(LocalVariableBadness, :args_used_with_splats)
     duster.dust!
