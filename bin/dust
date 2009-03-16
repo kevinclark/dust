@@ -36,7 +36,7 @@ class Module
       duster.warnings
     end.flatten
     
-    $warnings[self][name] = warnings
+    $warnings[self.name][name.to_s] = warnings
   end
 end
 
@@ -51,11 +51,17 @@ at_exit do
   
   puts "Nothing to report boss! He's clean!" if $warnings.empty?
   
-  $warnings.each do |klass, methods|
+  class_names_in_order = $warnings.keys.sort
+  
+  class_names_in_order.each do |klass|
     puts "#{klass}"
-    methods.each do |meth, warnings|
+    
+    methods_in_order = $warnings[klass].keys.sort
+    
+    methods_in_order.each do |meth|
       puts "  #{meth}"
-      warnings.each do |w|
+      
+      $warnings[klass][meth].each do |w|
         puts "    - #{w.message}"
       end
     end
@@ -63,4 +69,10 @@ at_exit do
   end
 end
 
-ARGV.each {|file| load file }
+ARGV.each do |file|
+  begin
+    load file
+  rescue Exception => e # grab *everything*
+    $stderr.puts "*** Dust had trouble loading #{file.inspect}:\n\t#{e.class} #{e.message}"
+  end
+end
