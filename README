@@ -1,3 +1,13 @@
+******************************************************************************
+*** This software is now called 'nitpick' and is located at:
+***   
+***    http://github.com/kevinclark/nitpick/tree/master
+***
+*** This was done to avoid clashing with another ruby project called dust 
+***
+*** 					- Kevin Clark 3/18/09
+******************************************************************************
+
 Ruby lint. Sorta.
 
 http://github.com/kevinclark/dust/wikis
