@@ -29,6 +29,12 @@ describe Dust::ArgumentDuster do
     duster.warnings.should == []
   end
   
+  it "should create warnings when calling super with explicit arguments" do
+    duster = Dust::ArgumentDuster.new(LocalVariableBadness, :super_with_explicit_args)
+    duster.dust!
+    duster.warnings.should == [Dust::Warnings::UnusedArgument.new(:arg)]
+  end
+  
   it "should create warnings when calling super with explicit arguments but without referencing the passed arguments" do
     duster = Dust::ArgumentDuster.new(LocalVariableBadness, :super_with_explicit_args)
     duster.dust!
